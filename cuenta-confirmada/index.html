@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmación de cuenta | OpoImagenCV</title>
+  <meta name="description" content="Confirmación de correo electrónico de OpoImagenCV.">
+  <style>
+    :root{
+      --navy:#0d2b45; --blue:#2f9ed6; --bg:#f5f8fb; --text:#263442;
+      --muted:#667788; --border:#dfe7ee; --ok:#178447; --okbg:#eefaf3;
+      --err:#b42318; --errbg:#fff2f0;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);
+      min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:min(680px,100%);background:#fff;border:1px solid var(--border);border-radius:20px;
+      box-shadow:0 14px 40px rgba(13,43,69,.08);padding:42px 34px;text-align:center}
+    .brand{color:var(--navy);font-size:1.25rem;font-weight:800;margin-bottom:28px}
+    .brand span{color:var(--blue)}
+    .icon{width:88px;height:88px;margin:0 auto 22px;border-radius:50%;display:flex;align-items:center;
+      justify-content:center;font-size:44px;background:var(--okbg);color:var(--ok)}
+    h1{color:var(--navy);margin:0 0 14px;line-height:1.2;font-size:clamp(1.8rem,5vw,2.5rem)}
+    p{line-height:1.65;color:var(--muted);font-size:1.04rem}
+    .box{margin:24px 0;padding:18px;border-radius:12px;background:#f7fafc;border:1px solid var(--border)}
+    .button{display:inline-block;margin-top:8px;padding:13px 22px;border-radius:10px;background:var(--navy);
+      color:#fff;text-decoration:none;font-weight:700}
+    .small{font-size:.9rem;margin-top:26px}
+    .error .icon{background:var(--errbg);color:var(--err)}
+    .error h1{color:var(--err)}
+  </style>
+</head>
+<body>
+  <main class="card" id="card">
+    <div class="brand">Opo<span>SanCV</span> · OpoImagenCV</div>
+    <div class="icon" id="icon">✓</div>
+    <h1 id="title">Correo electrónico confirmado</h1>
+    <p id="message">
+      Tu cuenta de OpoImagenCV ya está activada correctamente.
+      Puedes volver a la aplicación e iniciar sesión con tu correo y contraseña.
+    </p>
+
+    <div class="box" id="box">
+      <strong>Ya puedes volver a OpoImagenCV</strong><br>
+      <span style="color:#667788">No necesitas realizar ningún paso adicional.</span>
+    </div>
+
+    <a class="button" href="https://www.oposancv.es/">Ir a OpoSanCV</a>
+
+    <p class="small">
+      Si tienes algún problema, escríbenos a
+      <a href="mailto:soporte@oposancv.es">soporte@oposancv.es</a>.
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      const hash = window.location.hash.startsWith('#') ? window.location.hash.slice(1) : '';
+      const params = new URLSearchParams(hash);
+      const error = params.get('error') || params.get('error_code');
+      const description = params.get('error_description');
+
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+
+      if (error) {
+        const card = document.getElementById('card');
+        card.classList.add('error');
+        document.getElementById('icon').textContent = '!';
+        document.getElementById('title').textContent = 'No se ha podido confirmar el correo';
+        document.getElementById('message').textContent =
+          description
+            ? decodeURIComponent(description.replace(/\+/g, ' '))
+            : 'El enlace puede haber caducado o ya haberse utilizado.';
+        document.getElementById('box').innerHTML =
+          '<strong>Vuelve a OpoImagenCV</strong><br>' +
+          '<span style="color:#667788">Puedes solicitar un nuevo correo de confirmación o contactar con soporte.</span>';
+      } else if (!params.get('access_token') && !params.get('type')) {
+        document.getElementById('title').textContent = 'Confirmación de cuenta';
+        document.getElementById('message').textContent =
+          'Si has llegado aquí desde el enlace de confirmación de OpoImagenCV, tu cuenta ya debería estar activada. Vuelve a la aplicación e inicia sesión.';
+      }
+    })();
+  </script>
+</body>
+</html>
