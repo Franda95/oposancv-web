@@ -369,8 +369,10 @@
 
       <div class="footer-links">
         <a href="/politica-de-privacidad/">Privacidad</a>
+        <a href="/politica-de-cookies/">Cookies</a>
         <a href="/terminos-de-uso/">Condiciones de uso</a>
         <a href="/eliminar-cuenta/">Eliminar cuenta</a>
+        <button class="footer-cookie-button" type="button" data-cookie-settings>Configurar cookies</button>
         <a href="mailto:soporte@oposancv.es">soporte@oposancv.es</a>
       </div>
     </div>
@@ -379,5 +381,25 @@
       © 2026 OpoSanCV · Comunitat Valenciana
     </div>
   </footer>
+
+  <div class="cookie-banner" id="cookie-banner" hidden aria-live="polite" aria-label="Preferencias de cookies">
+    <div class="cookie-banner-inner">
+      <div class="cookie-copy">
+        <strong>Tu privacidad importa</strong>
+        <p>
+          Usamos Google Analytics únicamente si lo aceptas para saber cómo se utiliza OpoSanCV
+          y mejorar la web. Puedes aceptar o rechazar la analítica con la misma facilidad.
+          <a href="/politica-de-cookies/">Más información</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="cookie-action" data-cookie-reject>Rechazar analítica</button>
+        <button type="button" class="cookie-action" data-cookie-accept>Aceptar analítica</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/cookie-consent.js" defer></script>
+
 </body>
 </html>
