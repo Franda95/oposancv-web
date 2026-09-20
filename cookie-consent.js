@@ -5,6 +5,15 @@
   const META_PIXEL_ID = '1547223667072107';
   const STORAGE_KEY = 'oposancv_optional_cookies_consent_v2';
   const LEGACY_STORAGE_KEY = 'oposancv_analytics_consent';
+  const ATTRIBUTION_PARAMS = [
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_id',
+    'utm_content',
+    'utm_term',
+    'fbclid'
+  ];
   const banner = document.getElementById('cookie-banner');
 
   let analyticsLoaded = false;
@@ -69,6 +78,30 @@
       document.cookie = `${name}=; Max-Age=0; path=/; domain=.oposancv.es; SameSite=Lax`;
       document.cookie = `${name}=; Max-Age=0; path=/; domain=www.oposancv.es; SameSite=Lax`;
     }
+  }
+
+  function propagateAttributionToAppLinks() {
+    const currentParams = new URLSearchParams(window.location.search);
+    const attribution = new Map();
+
+    for (const key of ATTRIBUTION_PARAMS) {
+      const value = currentParams.get(key);
+      if (value) attribution.set(key, value);
+    }
+
+    if (attribution.size === 0) return;
+
+    document.querySelectorAll('a[href^="https://app.oposancv.es"]').forEach((link) => {
+      try {
+        const url = new URL(link.href);
+        for (const [key, value] of attribution.entries()) {
+          if (!url.searchParams.has(key)) {
+            url.searchParams.set(key, value);
+          }
+        }
+        link.href = url.toString();
+      } catch (_) {}
+    });
   }
 
   function attachCtaTracking() {
@@ -197,6 +230,7 @@
   });
 
   updateBannerCopy();
+  propagateAttributionToAppLinks();
 
   const choice = getChoice();
 
