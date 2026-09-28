@@ -27,7 +27,12 @@
     'utm_id',
     'utm_content',
     'utm_term',
-    'fbclid'
+    'fbclid',
+    'gclid',
+    'gbraid',
+    'wbraid',
+    'gad_source',
+    'gad_campaignid'
   ];
   const banner = document.getElementById('cookie-banner');
 
@@ -104,7 +109,7 @@
       if (value) attribution.set(key, value);
     }
 
-    if (attribution.size === 0) return;
+    const consentChoice = getChoice();
 
     document.querySelectorAll('a[href^="https://app.oposancv.es"]').forEach((link) => {
       try {
@@ -113,6 +118,9 @@
           if (!url.searchParams.has(key)) {
             url.searchParams.set(key, value);
           }
+        }
+        if (consentChoice === 'accepted' || consentChoice === 'rejected') {
+          url.searchParams.set('oposancv_consent', consentChoice);
         }
         link.href = url.toString();
       } catch (_) {}
@@ -218,6 +226,7 @@
     setChoice('accepted');
     hideBanner();
     loadOptionalTracking();
+    propagateAttributionToAppLinks();
   }
 
   function rejectOptionalCookies() {
@@ -230,6 +239,7 @@
 
     deleteOptionalCookies();
     hideBanner();
+    propagateAttributionToAppLinks();
   }
 
   document.querySelectorAll('[data-cookie-accept]').forEach((button) => {
