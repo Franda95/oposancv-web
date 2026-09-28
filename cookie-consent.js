@@ -1,6 +1,21 @@
 (() => {
   'use strict';
 
+  // Meta campaign C1 still points to the homepage in the existing immutable creative.
+  // Route only that paid campaign to the dedicated conversion landing while preserving attribution.
+  try {
+    const currentUrl = new URL(window.location.href);
+    const isHome = currentUrl.pathname === '/' || currentUrl.pathname === '';
+    const isRegistrationCampaign = currentUrl.searchParams.get('utm_campaign') === 'registro_sep26';
+
+    if (isHome && isRegistrationCampaign) {
+      const destination = new URL('/empieza/', currentUrl.origin);
+      currentUrl.searchParams.forEach((value, key) => destination.searchParams.set(key, value));
+      window.location.replace(destination.toString());
+      return;
+    }
+  } catch (_) {}
+
   const GA_MEASUREMENT_ID = 'G-2X25XMDGD5';
   const META_PIXEL_ID = '1547223667072107';
   const STORAGE_KEY = 'oposancv_optional_cookies_consent_v2';
