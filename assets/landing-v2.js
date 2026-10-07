@@ -1,7 +1,8 @@
 (() => {
   const link = document.querySelector('[data-whatsapp-support]');
   if (link) {
-    const number = (link.getAttribute('data-number') || '').replace(/\D/g,'');
+    const configured = (window.OpoSanCVSupport && window.OpoSanCVSupport.whatsapp) || '';
+    const number = (link.getAttribute('data-number') || configured || '').replace(/\D/g,'');
     const page = document.body.getAttribute('data-page-label') || 'OpoSanCV';
     if (!number) {
       link.hidden = true;
