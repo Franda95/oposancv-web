@@ -61,3 +61,17 @@ footer{background:#fff;border-top:1px solid var(--line);padding:38px 0 26px}.foo
 .wa-support::before{content:"¿Dudas? WhatsApp";position:absolute;right:68px;white-space:nowrap;background:#fff;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:.78rem;font-weight:900;box-shadow:var(--shadow2);opacity:0;transform:translateX(5px);pointer-events:none;transition:.18s ease}
 .wa-support:hover::before{opacity:1;transform:translateX(0)}
 @media(max-width:680px){.wa-support::before{display:none}.mock-option{font-size:.68rem}.mock-question{font-size:.82rem}}
+
+
+/* Ajustes específicos de captación */
+.acquisition-header .nav{grid-template-columns:auto 1fr auto}
+.already-account{align-self:center;color:var(--muted);font-size:.86rem;font-weight:750}
+.acquisition-hero .hero-lead{max-width:760px}
+.acq-microcopy{margin:12px 0 0;color:var(--muted);font-size:.82rem}
+@media(max-width:680px){
+  .acquisition-header .nav{display:grid;grid-template-columns:1fr auto;align-items:center}
+  .acquisition-header .nav>div:nth-child(2){display:none}
+  .acquisition-header .nav-actions{width:auto;display:flex}
+  .acquisition-header .already-account{display:none}
+  .acquisition-header .nav-actions .btn{min-height:40px}
+}
