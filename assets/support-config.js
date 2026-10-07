@@ -1,1 +1,1 @@
-window.OpoSanCVSupport = { whatsapp: '' };\n
+window.OpoSanCVSupport = { whatsapp: '34644504612' };
