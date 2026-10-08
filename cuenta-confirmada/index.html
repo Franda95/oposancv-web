@@ -55,10 +55,126 @@
 
   <script>
     (function () {
-      const hash = window.location.hash.startsWith('#') ? window.location.hash.slice(1) : '';
-      const params = new URLSearchParams(hash);
-      const error = params.get('error') || params.get('error_code');
-      const description = params.get('error_description');
+      'use strict';
+
+      const GA_MEASUREMENT_ID = 'G-2X25XMDGD5';
+      const GOOGLE_ADS_ID = 'AW-18474432612';
+      const GOOGLE_ADS_SIGNUP_SEND_TO = 'AW-18474432612/0CJMCKX5mIUdEOTwpelE';
+      const META_PIXEL_ID = '1547223667072107';
+      const CONSENT_KEY = 'oposancv_optional_cookies_consent_v2';
+
+      const hashString = window.location.hash.startsWith('#')
+        ? window.location.hash.slice(1)
+        : '';
+      const hash = new URLSearchParams(hashString);
+      const search = new URLSearchParams(window.location.search);
+
+      const error =
+        search.get('error') ||
+        search.get('error_code') ||
+        hash.get('error') ||
+        hash.get('error_code');
+      const description =
+        search.get('error_description') ||
+        hash.get('error_description');
+      const type = search.get('type') || hash.get('type');
+      const hasAccessToken = Boolean(hash.get('access_token'));
+      const hasAuthCode = Boolean(search.get('code') || hash.get('code'));
+      const signupConfirmation =
+        !error &&
+        (type === 'signup' ||
+          ((hasAccessToken || hasAuthCode) && type !== 'recovery'));
+
+      function hasConsent() {
+        try {
+          return localStorage.getItem(CONSENT_KEY) === 'accepted';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function eventKey() {
+        const raw = window.location.hash || window.location.search || 'signup';
+        let value = 0;
+        for (let i = 0; i < raw.length; i += 1) {
+          value = ((value << 5) - value) + raw.charCodeAt(i);
+          value |= 0;
+        }
+        return 'oposancv_confirmed_signup_tracked_' + Math.abs(value);
+      }
+
+      function wasTracked() {
+        try {
+          return localStorage.getItem(eventKey()) === '1';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function markTracked() {
+        try {
+          localStorage.setItem(eventKey(), '1');
+        } catch (_) {}
+      }
+
+      function trackConfirmedSignup() {
+        if (!signupConfirmation || !hasConsent() || wasTracked()) return;
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', GA_MEASUREMENT_ID);
+        window.gtag('config', GOOGLE_ADS_ID);
+        window.gtag('event', 'sign_up', {
+          method: 'email',
+          source: 'oposancv_confirmation'
+        });
+        window.gtag('event', 'conversion', {
+          send_to: GOOGLE_ADS_SIGNUP_SEND_TO,
+          value: 1.0,
+          currency: 'EUR'
+        });
+
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src =
+          'https://www.googletagmanager.com/gtag/js?id=' +
+          encodeURIComponent(GA_MEASUREMENT_ID);
+        document.head.appendChild(gtagScript);
+
+        if (!window.fbq) {
+          const fbq = function() {
+            if (fbq.callMethod) {
+              fbq.callMethod.apply(fbq, arguments);
+            } else {
+              fbq.queue.push(arguments);
+            }
+          };
+          window.fbq = fbq;
+          window._fbq = fbq;
+          fbq.push = fbq;
+          fbq.loaded = true;
+          fbq.version = '2.0';
+          fbq.queue = [];
+
+          const metaScript = document.createElement('script');
+          metaScript.async = true;
+          metaScript.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          document.head.appendChild(metaScript);
+        }
+
+        window.fbq('consent', 'grant');
+        window.fbq('init', META_PIXEL_ID);
+        window.fbq('track', 'PageView');
+        window.fbq('track', 'CompleteRegistration', {
+          content_name: 'OpoSanCV',
+          status: 'confirmed'
+        });
+
+        markTracked();
+      }
+
+      trackConfirmedSignup();
 
       if (window.location.hash) {
         history.replaceState(null, '', window.location.pathname + window.location.search);
@@ -76,7 +192,7 @@
         document.getElementById('box').innerHTML =
           '<strong>Vuelve a OpoImagenCV</strong><br>' +
           '<span style="color:#667788">Puedes solicitar un nuevo correo de confirmación o contactar con soporte.</span>';
-      } else if (!params.get('access_token') && !params.get('type')) {
+      } else if (!signupConfirmation) {
         document.getElementById('title').textContent = 'Confirmación de cuenta';
         document.getElementById('message').textContent =
           'Si has llegado aquí desde el enlace de confirmación de OpoImagenCV, tu cuenta ya debería estar activada. Vuelve a la aplicación e inicia sesión.';
