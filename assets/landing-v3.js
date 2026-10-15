@@ -45,7 +45,7 @@
         if (link.dataset.landingBound !== 'true') {
           link.dataset.landingBound = 'true';
           link.addEventListener('click', () => {
-            safeTrack('start_free_click', {
+            safeTrack(link.dataset.event || 'start_free_click', {
               service,
               category,
               page_label: pageLabel,
