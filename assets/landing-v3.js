@@ -45,7 +45,7 @@
         if (link.dataset.landingBound !== 'true') {
           link.dataset.landingBound = 'true';
           link.addEventListener('click', () => {
-            safeTrack('start_free_click', {
+            safeTrack(link.dataset.event || 'start_free_click', {
               service,
               category,
               page_label: pageLabel,
@@ -57,19 +57,23 @@
     });
   }
 
-  const exam = new Date(2026, 10, 8, 0, 0, 0);
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const days = Math.ceil((exam.getTime() - today.getTime()) / 86400000);
+  const examDate = body.dataset.examDate || '';
+  if (examDate) {
+    const parts = examDate.split('-').map(Number);
+    const exam = new Date(parts[0], parts[1] - 1, parts[2], 0, 0, 0);
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const days = Math.ceil((exam.getTime() - today.getTime()) / 86400000);
 
-  document.querySelectorAll('[data-exam-countdown]').forEach((el) => {
-    el.textContent = days > 1 ? 'faltan ' + days + ' días' :
-      days === 1 ? 'falta 1 día' :
-      days === 0 ? 'es hoy' : 'examen celebrado';
-  });
-  document.querySelectorAll('[data-exam-days]').forEach((el) => {
-    el.textContent = days >= 0 ? String(days) : '0';
-  });
+    document.querySelectorAll('[data-exam-countdown]').forEach((el) => {
+      el.textContent = days > 1 ? 'faltan ' + days + ' días' :
+        days === 1 ? 'falta 1 día' :
+        days === 0 ? 'es hoy' : 'examen celebrado';
+    });
+    document.querySelectorAll('[data-exam-days]').forEach((el) => {
+      el.textContent = days >= 0 ? String(days) : '0';
+    });
+  }
 
   const menuBtn = document.getElementById('menuBtn');
   const mainNav = document.getElementById('mainNav');
