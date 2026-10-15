@@ -1,0 +1,142 @@
+
+/* OpoSanCV · Landing V3
+   Complementa home-v3.css y mantiene la identidad visual de la home. */
+body.landing-v3{background:#fff}
+.landing-v3 .landing-hero{
+  padding:64px 0 72px;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(61,179,247,.16),transparent 31%),
+    linear-gradient(180deg,#fff 0%,#f5f8ff 100%);
+}
+.landing-v3 .landing-hero .wrap{display:flex;gap:48px;align-items:center}
+.landing-v3 .landing-copy{flex:1 1 56%;min-width:0;display:flex;flex-direction:column;gap:22px}
+.landing-v3 .landing-copy h1{
+  font-size:56px;line-height:1.01;font-weight:800;letter-spacing:-.025em;max-width:760px
+}
+.landing-v3 .landing-copy .sub{margin:0;font-size:20px;color:var(--muted);max-width:670px}
+.landing-v3 .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.landing-v3 .hero-actions .btn{min-width:220px}
+.landing-v3 .hero-proof{margin:0}
+.landing-v3 .urgency-note{
+  display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+  padding:9px 13px;border-radius:999px;background:#fff3e3;color:#7b4000;
+  font-size:14px;font-weight:800;border:1px solid #ffd29d
+}
+.landing-v3 .urgency-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+
+.landing-v3 .product-card{
+  flex:1 1 42%;min-width:0;background:linear-gradient(145deg,#e8f4ff,#dff3ff);
+  border-radius:30px;padding:26px;box-shadow:var(--shadow)
+}
+.landing-v3 .product-card-inner{
+  background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;
+  box-shadow:0 24px 48px -34px rgba(13,43,69,.5)
+}
+.landing-v3 .product-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
+.landing-v3 .product-top strong{font-family:'Bricolage Grotesque',sans-serif;font-size:18px}
+.landing-v3 .product-chip{font-size:12px;font-weight:800;background:var(--brand-light);color:var(--brand-dark);padding:5px 10px;border-radius:999px}
+.landing-v3 .product-progress{height:7px;background:#eef2f6;border-radius:99px;margin-bottom:20px}
+.landing-v3 .product-progress i{display:block;width:18%;height:100%;border-radius:99px;background:var(--brand)}
+.landing-v3 .demo-kicker{font-size:13px;font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.06em}
+.landing-v3 .single-question{font-size:20px;line-height:1.4;font-weight:800;margin:8px 0 16px}
+.landing-v3 .single-options{display:flex;flex-direction:column;gap:10px}
+.landing-v3 .single-option{
+  width:100%;display:flex;align-items:center;gap:11px;text-align:left;
+  border:2px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;
+  min-height:52px;font-size:15px;color:var(--ink)
+}
+.landing-v3 .single-option:hover{border-color:var(--brand)}
+.landing-v3 .single-option .letter{
+  width:29px;height:29px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  background:#eef2f6;font-weight:800;flex:none
+}
+.landing-v3 .single-option.correct{border-color:var(--brand);background:var(--brand-light)}
+.landing-v3 .single-option.correct .letter{background:var(--brand);color:#fff}
+.landing-v3 .single-option.wrong{border-color:var(--danger);background:#fdeee6}
+.landing-v3 .single-option.wrong .letter{background:var(--danger);color:#fff}
+.landing-v3 .single-option.dim{opacity:.58}
+.landing-v3 .single-feedback{
+  margin-top:14px;background:var(--bg);border-radius:14px;padding:15px 16px;
+  display:flex;flex-direction:column;gap:5px;font-size:14px
+}
+.landing-v3 .single-feedback span{color:var(--muted)}
+.landing-v3 .single-feedback .btn{margin-top:8px;align-self:flex-start;min-height:44px;font-size:14px;padding:0 18px}
+
+.landing-v3 .landing-facts{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.landing-v3 .landing-facts .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding-top:0;padding-bottom:0}
+.landing-v3 .landing-fact{padding:30px 24px;border-right:1px solid var(--line)}
+.landing-v3 .landing-fact:first-child{padding-left:0}
+.landing-v3 .landing-fact:last-child{border-right:0}
+.landing-v3 .landing-fact strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:36px;line-height:1.08}
+.landing-v3 .landing-fact span{display:block;color:var(--muted);font-size:14px;margin-top:5px}
+
+.landing-v3 .exam-banner{background:var(--ink);color:#fff}
+.landing-v3 .exam-banner .wrap{
+  padding-top:48px;padding-bottom:48px;display:flex;flex-wrap:wrap;gap:24px 36px;
+  align-items:center;justify-content:space-between
+}
+.landing-v3 .exam-banner h2{font-size:34px;line-height:1.08;margin-top:5px}
+.landing-v3 .exam-banner p{margin:7px 0 0;color:#cfe0ee;font-size:17px}
+.landing-v3 .exam-count{
+  min-width:220px;background:#123c60;border:1px solid #2e5071;border-radius:18px;padding:18px 20px
+}
+.landing-v3 .exam-count>span{display:block;color:#cfe0ee;font-size:13px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.landing-v3 .exam-count strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:30px;margin-top:3px}
+
+.landing-v3 .steps-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:38px}
+.landing-v3 .step-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px}
+.landing-v3 .step-card .num{margin-bottom:18px}
+.landing-v3 .step-card h3{font-size:21px;margin-bottom:8px}
+.landing-v3 .step-card p{margin:0;color:var(--muted);font-size:16px}
+
+.landing-v3 .sim-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start;margin-top:36px}
+.landing-v3 .sim-card{border:1px solid #2e5071;border-radius:20px;background:#123c60;padding:24px}
+.landing-v3 .sim-row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #2e5071}
+.landing-v3 .sim-row:last-child{border-bottom:0}
+.landing-v3 .sim-row span{color:#cfe0ee}
+.landing-v3 .sim-row strong{text-align:right}
+.landing-v3 .sim-copy{color:#cfe0ee;font-size:18px}
+.landing-v3 .sim-copy p{margin:0 0 18px}
+.landing-v3 .sim-copy .btn{margin-top:5px}
+
+.landing-v3 .feature-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:38px}
+.landing-v3 .feature{border:1px solid var(--line);border-radius:18px;padding:22px;background:#fff}
+.landing-v3 .feature svg{margin-bottom:13px}
+.landing-v3 .feature h3{font-size:20px;margin-bottom:7px}
+.landing-v3 .feature p{margin:0;color:var(--muted);font-size:15px}
+
+.landing-v3 .source-card{
+  display:flex;flex-wrap:wrap;gap:24px 36px;align-items:center;justify-content:space-between;
+  background:var(--brand-light);border:1px solid #cfe1f3;border-radius:22px;padding:28px;margin-top:36px
+}
+.landing-v3 .source-card .copy{flex:1 1 520px}
+.landing-v3 .source-card h3{font-size:24px;margin-bottom:7px}
+.landing-v3 .source-card p{margin:0;color:#2c4258}
+.landing-v3 .official-note{font-size:14px;color:var(--muted);margin-top:14px}
+
+.landing-v3 .faq{background:#fff}
+.landing-v3 .final .btns .btn{min-width:210px}
+
+@media(max-width:950px){
+  .landing-v3 .landing-hero .wrap{flex-direction:column;align-items:stretch}
+  .landing-v3 .product-card{width:100%}
+  .landing-v3 .landing-facts .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .landing-v3 .landing-fact{border-bottom:1px solid var(--line)}
+  .landing-v3 .landing-fact:nth-child(2){border-right:0}
+  .landing-v3 .landing-fact:nth-child(3),.landing-v3 .landing-fact:nth-child(4){border-bottom:0}
+  .landing-v3 .steps-grid,.landing-v3 .feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .landing-v3 .sim-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .landing-v3 .landing-hero{padding:40px 0 48px}
+  .landing-v3 .landing-copy h1{font-size:40px}
+  .landing-v3 .landing-copy .sub{font-size:18px}
+  .landing-v3 .product-card{padding:15px;border-radius:24px}
+  .landing-v3 .product-card-inner{padding:19px}
+  .landing-v3 .landing-facts .wrap{grid-template-columns:1fr}
+  .landing-v3 .landing-fact{padding:22px 0;border-right:0;border-bottom:1px solid var(--line)!important}
+  .landing-v3 .landing-fact:last-child{border-bottom:0!important}
+  .landing-v3 .steps-grid,.landing-v3 .feature-grid{grid-template-columns:1fr}
+  .landing-v3 .exam-banner h2{font-size:30px}
+  .landing-v3 .exam-count{width:100%}
+}
