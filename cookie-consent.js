@@ -2,6 +2,7 @@
   'use strict';
 
   const GA_MEASUREMENT_ID = 'G-2X25XMDGD5';
+  const GOOGLE_ADS_ID = 'AW-18474432612';
   const META_PIXEL_ID = '1547223667072107';
   const STORAGE_KEY = 'oposancv_optional_cookies_consent_v2';
   const LEGACY_STORAGE_KEY = 'oposancv_analytics_consent';
@@ -45,7 +46,7 @@
     const copy = banner.querySelector('.cookie-copy p');
     if (copy) {
       copy.innerHTML =
-        'Usamos Google Analytics y Meta Pixel únicamente si lo aceptas para medir el uso de OpoSanCV ' +
+        'Usamos Google Analytics, Google Ads y Meta Pixel únicamente si lo aceptas para medir el uso de OpoSanCV ' +
         'y el rendimiento de nuestras campañas. Puedes aceptar o rechazar estas cookies opcionales con la misma facilidad. ' +
         '<a href="/politica-de-cookies/">Más información</a>.';
     }
@@ -75,7 +76,8 @@
           name === '_ga' ||
           name.startsWith('_ga_') ||
           name === '_fbp' ||
-          name === '_fbc'
+          name === '_fbc' ||
+          name.startsWith('_gcl_')
       );
 
     for (const name of cookieNames) {
@@ -154,6 +156,7 @@
 
     window.gtag('js', new Date());
     window.gtag('config', GA_MEASUREMENT_ID);
+    window.gtag('config', GOOGLE_ADS_ID);
 
     const script = document.createElement('script');
     script.async = true;
